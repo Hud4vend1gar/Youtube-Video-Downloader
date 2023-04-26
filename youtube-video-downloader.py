@@ -3,8 +3,15 @@
 
 
 from pytube import YouTube
+import os.path
 
 a = 0
+
+def check_file(file_path):
+    if os.path.isfile(file_path) == True:
+        print("--> Video downloaded ")
+    else:
+        print("We encountered an error")
 
 def again():
     while True:
@@ -24,8 +31,8 @@ Do you want to do another download ? (Y/N)""")
             break
         else:
             print("Yes or No ? (Y/N)")
-            continue
-        
+            continue     
+
 try:
     while a == 0:
         try:
@@ -54,6 +61,7 @@ try:
             !!! Enter a valid youtube video url !!!""")
             continue
         print(f"Video Title: {video.title}")
+        path = "./" + video.title + ".mp4"
         print("""
         1) High Resolution
         2) Low Resolution
@@ -71,12 +79,14 @@ try:
             download_video = video.streams.get_highest_resolution()
             print(f"Video downloading ({download_video.filesize_mb}mb) ...")
             download_video.download()
+            check_file(path)
             again()
 
         elif resolution_option == 2:
             download_video = video.streams.get_lowest_resolution()
             print(f"Video downloading ({download_video.filesize_mb}mb) ...")
             download_video.download()
+            check_file(path)
             again()
 
         else:
