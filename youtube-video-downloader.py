@@ -9,7 +9,7 @@ a = 0
 
 def check_file(file_path):
     if os.path.isfile(file_path) == True:
-        print("--> Video downloaded ")
+        print("\n --> Video downloaded ")
     else:
         print("We encountered an error")
 
